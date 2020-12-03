@@ -1,0 +1,146 @@
+# ----------------------------------------------------------------------------------------------------------
+#     BEGIN LAYOUT -----------------------------------------------------------------------------------------
+
+[_treeview_songtree_lyrics]
+Type = G+
+Title = _"%a - %t [%l] (%Y)"
+Window = size=1600x1200
+Author = g-fb
+DefaultFocus = SongTree
+
+# --------------------------------
+
+VB_Main = HBToolBar _HP_Main HB_Controls
+
+HP_Main = __FilterPane0(nb=2,hidebb=1,hidetabs=1,tabpos=top, pages=folder, page=folder) _HP_Right
+
+HP_Right = NB_Playlist _PluginLyrics
+
+
+MBMainMenu = MainMenuItem LayoutItem LSortItem PSortItem QueueItem
+
+# --------------------------------
+# Toolbar
+# --------------------------------
+HBToolBar = MBMainMenu
+            _Filler100 Text(markup="%a - %t [%l] (%Y)") _Filler101
+            -Button(stock="gtk-close", click="CloseWindow") -Pref
+
+# --------------------------------
+# Playlist
+# --------------------------------
+NB_Playlist = (tabpos=bottom) SongTree(tabtitle="Library" \
+              cols="playandqueueandtrack title artist album playcount length",\
+              colwidth="title 350 artist 180 album 180 playcount 30",\
+              grouping="path|artistalbum_breadcrumbs(picsize=350)", follow=1, sort="path", songypad=10, click2=OpenSongProp)
+
+
+# --------------------------------
+# Controls
+# --------------------------------
+HB_Controls = VB_PlaybackBtns _VB_TrackInfoProgress VB_Volume Filler23(minwidth=15)
+
+VB_PlaybackBtns = _Filler15 HB_PlaybackBtns _Filler16
+HB_PlaybackBtns = Filler17(minwidth=10) Prev Play Next(click2=NextAlbum) Filler18(minwidth=50)
+
+VB_TrackInfoProgress = HB_ArtistTitleAlbum _VBTimeSlider
+
+HB_ArtistTitleAlbum = _Filler20 \
+                      Artist(expand_max=500,font=14,ellipsize=end,yalign=0.5) Label(text=" - ") \
+                      Title(expand_max=500, font=10,ellipsize=end) \
+                      Album(expand_max=500, font=12,ellipsize=end,yalign=0.5,markup=" [%l]",showcover=0) \
+                      _Filler21
+
+VB_Volume = Filler25(minheight=33) HB_Volume
+HB_Volume = Filler30(minwidth=50) _VolumeSlider(vertical=0,minwidth=100) 5Volume(xalign=0.5)
+
+
+VBTimeSlider = _TimeBar(text="$current/$length") Filler40(minheight=15)
+
+
+
+# ----------------------------------------------------------------------------------------------------------
+# Sizes
+# ----------------------------------------------------------------------------------------------------------
+HSize0 = 250 FilterPane0
+HSize1 = 1500 HP_Right
+HSize2 = 1100 NB_Playlist
+HSize3 = 250 PluginLyrics
+
+# END LAYOUT -----------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+# ----------------------------------------------------------------------------------------------------------
+#     BEGIN LAYOUT -----------------------------------------------------------------------------------------
+
+[_minimal]
+Type = G+
+Title = _"%a - %t [%l] (%Y)"
+Window = size=1100x450
+Author = g-fb
+DefaultFocus = Play
+
+# --------------------------------
+
+HBMain =  _VB_CoverControls HBBottom
+HBBottom = _VB_TrackInfoProgress Filler23(minwidth=15)
+
+VB_CoverControls = Cover(overlay=6x6:350x350:elementary/overlay.png,default=elementary/no-cover.svg,showcover=0) VB_PlaybackBtns
+
+VB_PlaybackBtns = _Filler10 HB_PlaybackBtns Filler11(minheight=5)
+HB_PlaybackBtns = _Filler20 Prev Play Next(click2=NextAlbum) _Filler21
+
+VB_TrackInfoProgress = _PluginLyrics HB_ArtistTitleAlbum VBTimeSlider
+
+HB_ArtistTitleAlbum = VolumeIcon _Filler30 \
+                      Artist(expand_max=500,font=14,ellipsize=end,yalign=0.5) Label(text=" - ") \
+                      Title(expand_max=500, font=10,ellipsize=end) \
+                      Album(expand_max=500, font=12,ellipsize=end,yalign=0.5,markup=" [%l]",showcover=0) \
+                      -Pref(maxwidth=32) _Filler31
+
+VBTimeSlider = _TimeBar(text="$current/$length") Filler40(minheight=15)
+
+# END LAYOUT -----------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------
+
+
+
+
+
+# ----------------------------------------------------------------------------------------------------------
+#     BEGIN LAYOUT -----------------------------------------------------------------------------------------
+
+[_minimalerer]
+Type = G+
+Title = _"%a - %t [%l] (%Y)"
+Window = size=440x580
+Author = g-fb
+DefaultFocus = Play
+
+# --------------------------------
+
+BM_Main = (icon=application-menu) LayoutItem MainMenuItem LSortItem PSortItem QueueItem
+
+VBMain = (border=10) VB_CoverControls HB_PlaybackBtns Filler10(minheight=10) HB_ArtistTitleAlbum VBTimeSlider _PluginLyrics
+
+VB_CoverControls = Cover(overlay=6x6:350x350:elementary/overlay.png,default=elementary/no-cover.svg,showcover=0) 
+
+HB_PlaybackBtns = BM_Main ToggleButton(widget=PluginLyrics,icon=view-media-lyrics,relief=none,size=large-toolbar,resize=v) _Filler20 Prev Play Next(click2=NextAlbum) _Filler21 -Pref -VolumeIcon
+
+VB_TrackInfoProgress = 
+
+HB_ArtistTitleAlbum = _Filler30 \ 
+                      Artist(expand_max=500,font=14,ellipsize=end,yalign=0.5) Label(text=" - ") \
+                      Title(expand_max=500, font=10,ellipsize=end) \
+                      Album(expand_max=500, font=12,ellipsize=end,yalign=0.5,markup=" [%l]",showcover=0) \
+                      _Filler31
+
+VBTimeSlider = _TimeBar(text="$current/$length") Filler40(minheight=15)
+
+# END LAYOUT -----------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------
